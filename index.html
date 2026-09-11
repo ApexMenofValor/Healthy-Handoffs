@@ -369,10 +369,16 @@ p { max-width: 60ch; }
   color: #ffffff;
   font-size: 0.78rem;
   font-weight: 600;
-  max-width: 120px;
+  max-width: 170px;
   text-align: center;
 }
 .audience-item svg { width: 32px; height: 32px; fill: var(--sage); }
+.audience-item-desc {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+}
 
 /* ── SECTION LAYOUT ──────────────────────────────────────────────── */
 .section {
@@ -453,10 +459,42 @@ p { max-width: 60ch; }
   .why-visual { order: -1; }
 }
 
+/* ── TECH / CREDIBILITY STRIP ────────────────────────────────────── */
+.tech-strip {
+  background: var(--stone-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
+}
+.tech-strip-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0;
+  text-align: center;
+}
+.tech-strip-item {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-mid);
+  padding: 0 1.25rem;
+}
+.tech-strip-sep {
+  color: var(--sage);
+  font-weight: 700;
+}
+@media (max-width: 640px) {
+  .tech-strip-inner { flex-direction: column; gap: 0.5rem; }
+  .tech-strip-sep { display: none; }
+}
+
 /* ── PROCESS ──────────────────────────────────────────────────────── */
 .process-steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 2.5rem;
   position: relative;
@@ -465,8 +503,8 @@ p { max-width: 60ch; }
   content: '';
   position: absolute;
   top: 28px;
-  left: calc(16.66% + 24px);
-  right: calc(16.66% + 24px);
+  left: calc(12.5% + 24px);
+  right: calc(12.5% + 24px);
   height: 2px;
   background: var(--sage);
   opacity: 0.4;
@@ -785,25 +823,42 @@ p { max-width: 60ch; }
         </div>
         <div class="form-row">
           <div class="field-group">
-            <label for="type">Property Type</label>
-            <select id="type" name="property_type">
-              <option value="">I am a…</option>
+            <label for="role">I Am A…</label>
+            <select id="role" name="role">
+              <option value="">Select one…</option>
               <option>Homeowner</option>
               <option>Realtor / Agent</option>
               <option>Property Manager</option>
-              <option>Landlord</option>
+              <option>Rental Owner / Landlord</option>
               <option>Cleaning Company</option>
               <option>Stager / Renovation Pro</option>
             </select>
           </div>
           <div class="field-group">
+            <label for="type">Property Type</label>
+            <select id="type" name="property_type">
+              <option value="">Select one…</option>
+              <option>Single-Family Home</option>
+              <option>Condo / Townhome</option>
+              <option>Apartment Unit</option>
+              <option>Multi-Family Rental</option>
+              <option>Commercial Space</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field-group">
             <label for="sqft">Approx. Square Footage</label>
             <input type="text" id="sqft" name="sqft" placeholder="e.g. 1,800 sq ft">
+          </div>
+          <div class="field-group">
+            <label for="service_date">Desired Service Date</label>
+            <input type="date" id="service_date" name="service_date">
           </div>
         </div>
         <div class="field-group">
           <label for="message">Tell us about your property or project</label>
-          <textarea id="message" name="message" placeholder="Desired date, any details…"></textarea>
+          <textarea id="message" name="message" placeholder="Any additional details…"></textarea>
         </div>
         <button type="submit" class="btn-submit">Get My Quote →</button>
       </form>
@@ -815,29 +870,34 @@ p { max-width: 60ch; }
   </div>
 </section>
 
-<!-- ── AUDIENCE STRIP ─────────────────────────────────────── -->
-<div class="audience-strip">
-  <p class="audience-strip-label">Trusted by people who take pride in their spaces</p>
+<!-- ── WHO IT'S FOR ─────────────────────────────────────────── -->
+<div class="audience-strip" id="partners">
+  <p class="audience-strip-label">Who a Healthy Handoff is for</p>
   <div class="audience-icons">
     <div class="audience-item">
       <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      <span>Homeowners &amp; Realtors</span>
-    </div>
-    <div class="audience-item">
-      <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-      <span>Property Managers &amp; Landlords</span>
-    </div>
-    <div class="audience-item">
-      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 000 4h6a2 2 0 000-4M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-      <span>Cleaning Companies</span>
+      <span>Moving In</span>
+      <p class="audience-item-desc">A professional final step before your family enters the new space.</p>
     </div>
     <div class="audience-item">
       <svg viewBox="0 0 24 24"><path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-      <span>Move-Out / Move-In Specialists</span>
+      <span>Realtors</span>
+      <p class="audience-item-desc">A premium, memorable client handoff or closing-gift experience.</p>
+    </div>
+    <div class="audience-item">
+      <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <span>Property Managers</span>
+      <p class="audience-item-desc">A consistent, documented final-step process between occupants.</p>
     </div>
     <div class="audience-item">
       <svg viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
-      <span>Stagers &amp; Renovation Pros</span>
+      <span>Rental Owners</span>
+      <p class="audience-item-desc">Documented treatment added to turnover preparation.</p>
+    </div>
+    <div class="audience-item">
+      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 000 4h6a2 2 0 000-4M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <span>Cleaning Partners</span>
+      <p class="audience-item-desc">Extend your cleaning service with a differentiated final step.</p>
     </div>
   </div>
 </div>
@@ -880,15 +940,26 @@ p { max-width: 60ch; }
   </div>
 </section>
 
+<!-- ── TECH / CREDIBILITY STRIP ─────────────────────────────── -->
+<div class="tech-strip">
+  <div class="tech-strip-inner">
+    <span class="tech-strip-item">Professional R-Zero Arc 254&nbsp;nm UV-C Technology</span>
+    <span class="tech-strip-sep">•</span>
+    <span class="tech-strip-item">Designed for Vacant Spaces After Normal Cleaning</span>
+    <span class="tech-strip-sep">•</span>
+    <span class="tech-strip-item">Room-by-Room Treatment &amp; Cycle Documentation</span>
+  </div>
+</div>
+
 <!-- ── PROCESS ───────────────────────────────────────────── -->
 <section class="section" id="process">
   <div class="section-inner">
-    <p class="section-eyebrow" style="text-align:center">Our Simple 3-Step Process</p>
+    <p class="section-eyebrow" style="text-align:center">Our Simple 4-Step Process</p>
     <h2 style="text-align:center;color:var(--text)">How a Healthy Handoff works</h2>
     <div class="process-steps">
       <div class="process-step">
         <div class="step-number">1</div>
-        <h3>Clean First</h3>
+        <h3>Clean</h3>
         <p>Your space is professionally cleaned and prepped. Healthy Handoff always follows conventional cleaning — never replaces it.</p>
         <div class="step-icon">
           <svg viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -896,7 +967,7 @@ p { max-width: 60ch; }
       </div>
       <div class="process-step">
         <div class="step-number">2</div>
-        <h3>UV-C Treatment</h3>
+        <h3>Treat</h3>
         <p>We use commercial-grade UV-C technology to treat surfaces and air in each room. The space must be vacant during operation.</p>
         <div class="step-icon">
           <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
@@ -904,10 +975,18 @@ p { max-width: 60ch; }
       </div>
       <div class="process-step">
         <div class="step-number">3</div>
-        <h3>Documented Confidence</h3>
+        <h3>Document</h3>
         <p>You receive a Healthy Handoff Treatment Certificate with date, time and technician details — for your records and peace of mind.</p>
         <div class="step-icon">
           <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 4H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V5a1 1 0 00-1-1h-3M9 4h6M9 4a1 1 0 000 2h6a1 1 0 000-2"/></svg>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h3>Return</h3>
+        <p>The space is ready — keys change hands with a documented final step behind them.</p>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
         </div>
       </div>
     </div>
