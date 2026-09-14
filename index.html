@@ -333,6 +333,19 @@ p { max-width: 60ch; }
 }
 .form-secure svg { width: 11px; height: 11px; fill: var(--text-soft); }
 
+.quote-success {
+  background: #EAF6EF;
+  border: 1px solid #B7E4C7;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  color: #1E5631;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+:root:not([data-theme="light"]) .quote-success { background: #16321F; border-color: #2C5A3D; color: #BFE8CE; }
+:root[data-theme="dark"] .quote-success { background: #16321F; border-color: #2C5A3D; color: #BFE8CE; }
+.quote-success p { margin: 0; }
+
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; }
   .quote-form-card { max-width: 540px; }
@@ -802,7 +815,15 @@ p { max-width: 60ch; }
           <p>Fast. Easy. No obligation.</p>
         </div>
       </div>
-      <form class="form-grid" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div id="quote-success" class="quote-success" style="display:none">
+        <p><strong>Thanks — your request is in.</strong> We'll be in touch within 1 business day.</p>
+      </div>
+      <form class="form-grid" id="quote-request-form" action="https://formsubmit.co/matt@healthyhandoffs.com" method="POST">
+        <input type="hidden" name="_subject" value="New Quote Request — Healthy Handoffs">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://healthyhandoffs.com/?sent=true#quote-form">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-row">
           <div class="field-group">
             <label for="name">Full Name</label>
@@ -1104,6 +1125,26 @@ p { max-width: 60ch; }
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    if (new URLSearchParams(window.location.search).get('sent') === 'true') {
+      var form = document.getElementById('quote-request-form');
+      var success = document.getElementById('quote-success');
+      if (form) form.style.display = 'none';
+      if (success) {
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      // Clean the ?sent=true off the URL so a page refresh doesn't re-show it.
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.delete('sent');
+        window.history.replaceState({}, document.title, url.pathname + url.hash);
+      }
+    }
+  })();
+</script>
 
 </body>
 </html>
