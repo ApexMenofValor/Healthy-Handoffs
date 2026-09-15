@@ -76,7 +76,7 @@
   :root:not([data-theme="light"]) .why-visual {
     background: linear-gradient(145deg, #1A2C38, #142230);
   }
-  :root:not([data-theme="light"]) .map-placeholder {
+  :root:not([data-theme="light"]) .map-embed {
     background: #1A2C3C;
     border-color: #2E3A4E;
   }
@@ -92,7 +92,7 @@
 :root[data-theme="dark"] .why-visual {
   background: linear-gradient(145deg, #1A2C38, #142230);
 }
-:root[data-theme="dark"] .map-placeholder {
+:root[data-theme="dark"] .map-embed {
   background: #1A2C3C;
   border-color: #2E3A4E;
 }
@@ -640,16 +640,14 @@ p { max-width: 60ch; }
   font-size: 0.82rem;
   font-weight: 600;
 }
-.map-placeholder {
+.map-embed {
   background: #DDE8F0;
   border-radius: var(--radius-lg);
   aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed var(--border);
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
-.map-placeholder svg { width: 48px; height: 48px; fill: var(--ink-soft); opacity: 0.4; }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 @media (max-width: 768px) {
   .service-area-inner { grid-template-columns: 1fr; }
 }
@@ -1064,8 +1062,13 @@ p { max-width: 60ch; }
           <span class="service-tag">+ surrounding areas</span>
         </div>
       </div>
-      <div class="map-placeholder">
-        <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=33.5767552,-117.1611983&z=12&output=embed"
+          title="Healthy Handoffs service area map — Southwest Riverside County"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
       </div>
     </div>
   </div>
